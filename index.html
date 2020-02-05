@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Phython documentation page</title>
+	<style type="text/css">
+		body{
+			display: grid;
+			grid-template-columns:1fr 4fr;
+			font-family: sans-serif;
+			margin:0;
+			padding:0;
+			background:  #f2f2f2;
+		}
+	
+		#navbar header{
+			font-weight:bold;
+			font-size:25px;
+			text-align:center;
+		}
+		#navbar{
+			padding-top:20px;
+			position: fixed;
+			border-right:3px solid  grey;
+			background: #d9d9d9;
+			height:100%;
+			grid-area:nav;
+
+		}
+		#navbar ul{
+			padding:0;
+
+
+		}
+		#navbar ul li{
+			list-style-type:none;
+			
+			border:1px solid black;
+			border-right:0;
+
+		}
+		#navbar ul li a{
+		text-decoration:none;
+		color:black;
+		
+		display: block;
+		padding:25px 55px;
+
+		}
+	#navbar ul li a:hover{
+			font-weight: bold;
+			}
+
+		#main-doc{
+		margin-left: 320px;
+		width:70vw;
+		grid-area:main;
+		}
+		#main-doc h3{
+			font-size: 22px;
+		}
+		#main-doc p{
+			opacity: 0.9;
+			line-height: 30px;
+		}
+		#main-doc code{
+			padding:5px;
+			display: block;
+			background: lightgrey;
+		}
+		@media (max-width:700px){ /*Mobile*/
+			#navbar{
+				position: absolute;
+				top:0;
+				margin:auto;
+				left:0;
+				right:0;
+				height:auto;
+			}
+			#navbar ul {
+				display: flex;
+	}
+			#navbar ul li a{
+				text-align:center;
+				padding:0;
+			}
+			#navbar ul li a:hover{
+			font-weight: bold;
+			}
+
+			#main-doc{
+				margin-top:100px;
+				margin-left: 0;
+			
+			}
+
+}
+	</style>
+</head>
+<body>
+	<nav id="navbar">
+		<header>Python documentation</header>
+			<ul>
+			<li><a href="#Introduction" class="nav-link">Introduction</a> </li>
+			<li><a href="#Compound_statements" class="nav-link">Compound statements</a></li>
+			<li><a href="#if_statement" class="nav-link">if statement</a></li>
+      <li><a href="#while_statement" class="nav-link">while statement</a></li>
+			<li><a href="#for_statement" class="nav-link">for statement</a></li>
+			<li><a href="#with_statement" class="nav-link">with statement</a></li>
+		</ul>
+	</nav>
+<main id="main-doc">
+	<section class="main-section" id="Introduction">
+		<header><h3>Introduction</h3></header>
+		<p>This reference manual describes the Python programming language. It is not intended as a tutorial.</p>
+		<p>While I am trying to be as precise as possible, I chose to use English rather than formal specifications for everything except syntax and lexical analysis. This should make the document more understandable to the average reader, but will leave room for ambiguities. Consequently, if you were coming from Mars and tried to re-implement Python from this document alone, you might have to guess things and in fact you would probably end up implementing quite a different language. On the other hand, if you are using Python and wonder what the precise rules about a particular area of the language are, you should definitely be able to find them here. If you would like to see a more formal definition of the language, maybe you could volunteer your time — or invent a cloning machine :-).</p>
+		<p>It is dangerous to add too many implementation details to a language reference document — the implementation may change, and other implementations of the same language may work differently. On the other hand, CPython is the one Python implementation in widespread use (although alternate implementations continue to gain support), and its particular quirks are sometimes worth being mentioned, especially where the implementation imposes additional limitations. Therefore, you’ll find short “implementation notes” sprinkled throughout the text.</p>
+		<p>Every Python implementation comes with a number of built-in and standard modules. These are documented in The Python Standard Library. A few built-in modules are mentioned when they interact in a significant way with the language definition.</p>
+	</section>
+	<section class="main-section" id="Compound_statements">
+		<header><h3>Compound statements</h3></header>
+		<p>Compound statements contain (groups of) other statements; they affect or control the execution of those other statements in some way. In general, compound statements span multiple lines, although in simple incarnations a whole compound statement may be contained in one line.</p>
+		<p>The if, while and for statements implement traditional control flow constructs. try specifies exception handlers and/or cleanup code for a group of statements, while the with statement allows the execution of initialization and finalization code around a block of code. Function and class definitions are also syntactically compound statements.</p>
+		<p>A compound statement consists of one or more ‘clauses.’ A clause consists of a header and a ‘suite.’ The clause headers of a particular compound statement are all at the same indentation level. Each clause header begins with a uniquely identifying keyword and ends with a colon. A suite is a group of statements controlled by a clause. A suite can be one or more semicolon-separated simple statements on the same line as the header, following the header’s colon, or it can be one or more indented statements on subsequent lines. Only the latter form of a suite can contain nested compound statements; the following is illegal, mostly because it wouldn’t be clear to which if clause a following else clause would belong:</p>
+		<code><b>if</b> test1: <b>if</b> test2: <span>print</span>(x)</code>
+	</section>
+	<section class="main-section" id="if_statement">
+		<header><h3>if statement</h3></header>
+		<p>The if statement is used for conditional execution:</p>
+		<code>if_stmt ::=  "if" expression ":" suite<br>
+             ("elif" expression ":" suite)*
+             ["else" ":" suite]</code>
+	</section>
+	<section class="main-section" id="while_statement">
+		<header><h3>while statement</h3></header>
+		<p>The while statement is used for repeated execution as long as an expression is true:</p>
+		<code>while_stmt ::=  "while" expression ":" suite<br>["else" ":" suite]</code>
+	</section>
+
+	<section class="main-section" id="for_statement">
+		<header><h3>for statement</h3></header>
+		<p>The for statement is used to iterate over the elements of a sequence (such as a string, tuple or list) or other iterable object:</p>
+		<code>for_stmt ::=  "for" target_list "in" expression_list ":" suite<br>["else" ":" suite]</code>
+		<p>The for-loop makes assignments to the variables(s) in the target list. This overwrites all previous assignments to those variables including those made in the suite of the for-loop:</p>
+		<code>for i in range(10):<br>print(i)<br>i = 5  </code>
+	</section>
+
+		<section class="main-section" id="with_statement">
+		<header><h3>with statement</h3></header>
+			<p>The with statement is used to wrap the execution of a block with methods defined by a context manager (see section With Statement Context Managers). This allows common try…except…finally usage patterns to be encapsulated for convenient reuse.</p>
+			<code><b>with_stmt</b> ::=  "with" with_item ("," with_item)* ":" suite<br><b>with_item</b> ::=  expression ["as" target]</code>
+			<p>The execution of the with statement with one “item” proceeds as follows:</p>
+			<ol>
+				<li>The context expression (the expression given in the with_item) is evaluated to obtain a context manager.</li>
+				<li>The context manager’s __exit__() is loaded for later use.</li>
+				<li>The context manager’s __enter__() method is invoked.</li>
+				<li>If a target was included in the with statement, the return value from __enter__() is assigned to it.</li>
+				<li>The suite is executed.</li>
+				<li>The context manager’s __exit__() method is invoked. If an exception caused the suite to be exited, its type, value, and traceback are passed as arguments to __exit__(). Otherwise, three None arguments are supplied.</li>
+			</ol>
+		</section>
+</main>
+
+
+
+</body>
+</html>
